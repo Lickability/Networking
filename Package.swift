@@ -3,10 +3,10 @@
 
 import PackageDescription
 
+let name = "Networking"
 let package = Package(
-    name: "Networking",
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ]
+    name: name,
+    platforms: [.iOS(.v13)],
+    products: [.library(name: name, targets: [name])],
+    targets: [.target(name: name)]
 )
