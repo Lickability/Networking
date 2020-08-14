@@ -8,5 +8,5 @@ let package = Package(
     name: name,
     platforms: [.iOS(.v13)],
     products: [.library(name: name, targets: [name])],
-    targets: [.target(name: name, path: "Sources/Networking")]
+    targets: [.target(name: name)]
 )
