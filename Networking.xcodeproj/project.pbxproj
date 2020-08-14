@@ -81,6 +81,14 @@
 		4C04A62924E6F48300D73E0E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4CFFC47624E6F78200CABB65 /* Networking */,
+			);
+			path = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		4CFFC47624E6F78200CABB65 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
 				F2B5BC48248836F300B6A52A /* HTTPMethod.swift */,
 				F2B5BC4C2488375C00B6A52A /* NetworkError.swift */,
 				F2B5BC4E2488376C00B6A52A /* NetworkRequest.swift */,
@@ -90,8 +98,8 @@
 				F2B5BC56248837CB00B6A52A /* NetworkController.swift */,
 				4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */,
 			);
-			path = Sources;
-			sourceTree = SOURCE_ROOT;
+			path = Networking;
+			sourceTree = "<group>";
 		};
 		F2B5BC1A248836C500B6A52A = {
 			isa = PBXGroup;
