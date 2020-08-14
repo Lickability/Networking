@@ -105,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				F2B5BC25248836C500B6A52A /* Networking */,
+				F2B5BC4B248836FA00B6A52A /* Example */,
 				F2B5BC3C248836C600B6A52A /* Tests */,
 				F2B5BC24248836C500B6A52A /* Products */,
 			);
@@ -123,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				4C04A62924E6F48300D73E0E /* Sources */,
-				F2B5BC4B248836FA00B6A52A /* Example */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -427,10 +427,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Networking/Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
 				DEVELOPMENT_TEAM = JL4AKR8DVC;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Networking/Example/Info.plist;
+				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -448,10 +448,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Networking/Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
 				DEVELOPMENT_TEAM = JL4AKR8DVC;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Networking/Example/Info.plist;
+				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
