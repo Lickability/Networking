@@ -78,11 +78,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C04A62924E6F48300D73E0E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F2B5BC48248836F300B6A52A /* HTTPMethod.swift */,
+				F2B5BC4C2488375C00B6A52A /* NetworkError.swift */,
+				F2B5BC4E2488376C00B6A52A /* NetworkRequest.swift */,
+				F2B5BC502488377600B6A52A /* NetworkResponse.swift */,
+				F2B5BC522488378200B6A52A /* RequestBehavior.swift */,
+				F2B5BC54248837B400B6A52A /* NetworkRequestPerformer.swift */,
+				F2B5BC56248837CB00B6A52A /* NetworkController.swift */,
+				4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */,
+			);
+			path = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
 		F2B5BC1A248836C500B6A52A = {
 			isa = PBXGroup;
 			children = (
 				F2B5BC25248836C500B6A52A /* Networking */,
-				F2B5BC3C248836C600B6A52A /* NetworkingTests */,
+				F2B5BC3C248836C600B6A52A /* Tests */,
 				F2B5BC24248836C500B6A52A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,8 +114,8 @@
 		F2B5BC25248836C500B6A52A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				4C04A62924E6F48300D73E0E /* Sources */,
 				F2B5BC4B248836FA00B6A52A /* Example */,
-				F2B5BC4A248836F600B6A52A /* Framework */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -113,28 +128,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		F2B5BC3C248836C600B6A52A /* NetworkingTests */ = {
+		F2B5BC3C248836C600B6A52A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				F2B5BC3D248836C600B6A52A /* NetworkingTests.swift */,
 				F2B5BC3F248836C600B6A52A /* Info.plist */,
 			);
-			path = NetworkingTests;
-			sourceTree = "<group>";
-		};
-		F2B5BC4A248836F600B6A52A /* Framework */ = {
-			isa = PBXGroup;
-			children = (
-				F2B5BC48248836F300B6A52A /* HTTPMethod.swift */,
-				F2B5BC4C2488375C00B6A52A /* NetworkError.swift */,
-				F2B5BC4E2488376C00B6A52A /* NetworkRequest.swift */,
-				F2B5BC502488377600B6A52A /* NetworkResponse.swift */,
-				F2B5BC522488378200B6A52A /* RequestBehavior.swift */,
-				F2B5BC54248837B400B6A52A /* NetworkRequestPerformer.swift */,
-				F2B5BC56248837CB00B6A52A /* NetworkController.swift */,
-				4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */,
-			);
-			path = Framework;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		F2B5BC4B248836FA00B6A52A /* Example */ = {
@@ -463,7 +463,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JL4AKR8DVC;
-				INFOPLIST_FILE = NetworkingTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -485,7 +485,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JL4AKR8DVC;
-				INFOPLIST_FILE = NetworkingTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
