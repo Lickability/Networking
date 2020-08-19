@@ -53,6 +53,7 @@ public extension NetworkRequest {
         }
         
         urlRequest.httpMethod = httpMethod.rawValue
+        httpHeaders.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.key) }
         urlRequest.httpBody = httpBody
         
         return urlRequest
