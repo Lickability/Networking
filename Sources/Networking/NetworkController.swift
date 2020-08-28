@@ -55,8 +55,8 @@ public final class NetworkController {
         if let error = error {
             return .failure(.underlyingNetworkingError(error))
         } else if let response = response {
-            if let httpResponse = response as? HTTPURLResponse, !successHTTPStatusCodes.contains(statusCode: httpResponse.statusCode)  {
-                return .failure(.unsuccessfulStatusCode(statusCode: httpResponse.statusCode, data: data))
+            if let statusCode = (response as? HTTPURLResponse)?.statusCode, !successHTTPStatusCodes.contains(statusCode: statusCode)  {
+                return .failure(.unsuccessfulStatusCode(statusCode: statusCode, data: data?.isEmpty == true ? nil : data))
             } else {
                 return .success(NetworkResponse(data: data, response: response))
             }
@@ -83,14 +83,19 @@ extension NetworkController: NetworkRequestPerformer {
 
     @available(iOS 13.0, *)
     @discardableResult public func send(_ request: NetworkRequest, requestBehaviors: [RequestBehavior] = []) -> AnyPublisher<NetworkResponse, NetworkError> {
-        typealias ResultType = Result<NetworkResponse, NetworkError>
-
         let behaviors = defaultRequestBehaviors + requestBehaviors
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
         
         return urlSession.dataTaskPublisher(for: urlRequest)
-            .map { NetworkResponse(data: $0, response: $1) }
-            .mapError { .underlyingNetworkingError($0) }
+            .mapError { NetworkError.underlyingNetworkingError($0) }
+            .tryMap { data, response in
+                if let statusCode = (response as? HTTPURLResponse)?.statusCode, !request.successHTTPStatusCodes.contains(statusCode: statusCode) {
+                    throw NetworkError.unsuccessfulStatusCode(statusCode: statusCode, data: data.isEmpty ? nil : data)
+                } else {
+                    return NetworkResponse(data: data, response: response)
+                }
+            }
+            .mapError { ($0 as? NetworkError) ?? .underlyingNetworkingError($0) }
             .handleEvents(receiveOutput: { response in
                 behaviors.requestDidFinish(result: .success(response))
             }, receiveCompletion: { completion in
