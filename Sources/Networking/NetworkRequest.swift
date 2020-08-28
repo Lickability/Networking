@@ -26,6 +26,9 @@ public protocol NetworkRequest {
     /// A list of query parameters to add to the URL.
     var queryParameters: [URLQueryItem] { get }
     
+    /// The HTTP header fields and their values to set on the request.
+    var httpHeaders: [String: String] { get }
+    
     /// The data to send in the HTTPBody.
     var httpBody: Data? { get }
 }
@@ -50,6 +53,7 @@ public extension NetworkRequest {
         }
         
         urlRequest.httpMethod = httpMethod.rawValue
+        httpHeaders.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.key) }
         urlRequest.httpBody = httpBody
         
         return urlRequest
@@ -61,6 +65,10 @@ public extension NetworkRequest {
 
     var queryParameters: [URLQueryItem] {
         return []
+    }
+    
+    var httpHeaders: [String: String] {
+        return [:]
     }
     
     var httpBody: Data? {
