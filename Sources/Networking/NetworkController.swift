@@ -33,7 +33,7 @@ public final class NetworkController {
         return urlRequest
     }
 
-    private func makeDataTask(forURLRequest urlRequest: URLRequest, behaviors: [RequestBehavior] = [], completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> URLSessionDataTask {
+    private func makeDataTask(forURLRequest urlRequest: URLRequest, behaviors: [RequestBehavior] = [], successHTTPStatusCodes: HTTPStatusCodes, completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> URLSessionDataTask {
 
         return urlSession.dataTask(with: urlRequest) { [weak self] (data, response, error) in
             guard let self = self else {
@@ -43,7 +43,7 @@ public final class NetworkController {
                 return
             }
 
-            let result = self.taskResult(fromData: data, response: response, error: error)
+            let result = self.taskResult(fromData: data, response: response, error: error, successHTTPStatusCodes: successHTTPStatusCodes)
 
             behaviors.requestDidFinish(result: result)
 
@@ -51,11 +51,15 @@ public final class NetworkController {
         }
     }
 
-    private func taskResult(fromData data: Data?, response: URLResponse?, error: Error?) -> Result<NetworkResponse, NetworkError> {
+    private func taskResult(fromData data: Data?, response: URLResponse?, error: Error?, successHTTPStatusCodes: HTTPStatusCodes) -> Result<NetworkResponse, NetworkError> {
         if let error = error {
             return .failure(.underlyingNetworkingError(error))
         } else if let response = response {
-            return .success(NetworkResponse(data: data, response: response))
+            if let httpResponse = response as? HTTPURLResponse, !successHTTPStatusCodes.contains(statusCode: httpResponse.statusCode)  {
+                return .failure(.unsuccessfulStatusCode(statusCode: httpResponse.statusCode, data: data))
+            } else {
+                return .success(NetworkResponse(data: data, response: response))
+            }
         } else {
             return .failure(.noResponse)
         }
@@ -70,7 +74,7 @@ extension NetworkController: NetworkRequestPerformer {
         let behaviors = defaultRequestBehaviors + requestBehaviors
 
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
-        let dataTask = makeDataTask(forURLRequest: urlRequest, completion: completion)
+        let dataTask = makeDataTask(forURLRequest: urlRequest, successHTTPStatusCodes: request.successHTTPStatusCodes, completion: completion)
 
         dataTask.resume()
 

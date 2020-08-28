@@ -18,11 +18,19 @@ public enum NetworkError: Error {
     case noData
     
     /// An underlying decoding error occurred.
-    case decodingError(Error)
+    /// - Parameter error: The error that occurred while decoding.
+    case decodingError(_ error: Error)
     
     /// There was no strong reference kept to the `NetworkController`.
     case noStrongReferenceToNetworkController
-
+    
+    /// The request succeeded, but the HTTP status code did not fall within a range considered successful.
+    /// - Parameters:
+    ///   - statusCode: The status that was received.
+    ///   - data: The response data that was received.
+    case unsuccessfulStatusCode(statusCode: Int, data: Data?)
+    
     /// A generic error received from the core networking library.
-    case underlyingNetworkingError(Error)
+    /// - Parameter error: The error that was received.
+    case underlyingNetworkingError(_ error: Error)
 }
