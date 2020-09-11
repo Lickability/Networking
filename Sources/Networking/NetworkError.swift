@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A list of possible errors encountered during networking.
+/// Possible errors encountered during networking.
 public enum NetworkError: Error {
     
     /// The network request completed but erroneously provided no response.
