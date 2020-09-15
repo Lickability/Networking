@@ -1,0 +1,28 @@
+{
+  "name": "Networking",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Lickability/Networking",
+  "source": {
+      "git": "https://github.com/Lickability/Networking.git",
+      "tag": "0.1.0"
+  },
+  "summary": "A library that handles networking.",
+  "authors" : {
+    "Michael Liberatore": "michael@lickability.com",
+    "Andrew Harrison": "andrew@lickability.com"
+  },
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "platforms": {
+    "ios": "13.0"
+  },
+  "swift_version": "5.0",
+  "requires_arc": true,
+  "frameworks": [
+    "Foundation"
+  ],
+  "source_files": "Sources/Networking/**/*",
+  "dependencies": { }
+}
