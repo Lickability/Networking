@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,8 @@ import PackageDescription
 let name = "Networking"
 let package = Package(
     name: name,
+    defaultLocalization: "en",
     platforms: [.iOS(.v13)],
     products: [.library(name: name, targets: [name])],
-    targets: [.target(name: name)]
+    targets: [.target(name: name, resources: [.process("Resources")])]
 )

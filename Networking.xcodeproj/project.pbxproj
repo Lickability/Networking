@@ -89,6 +89,7 @@
 		4CFFC47624E6F78200CABB65 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				F2BE375B254C95DF0062C317 /* Resources */,
 				F2B5BC48248836F300B6A52A /* HTTPMethod.swift */,
 				F2B5BC4C2488375C00B6A52A /* NetworkError.swift */,
 				F2B5BC4E2488376C00B6A52A /* NetworkRequest.swift */,
@@ -159,6 +160,13 @@
 				F2B5BC2E248836C600B6A52A /* Preview Content */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		F2BE375B254C95DF0062C317 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
