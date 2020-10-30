@@ -11,6 +11,8 @@ import Foundation
 /// Possible errors encountered during networking.
 public enum NetworkError: LocalizedError {
     
+    // MARK: - NetworkError
+    
     /// The network request completed but erroneously provided no response.
     case noResponse
     
@@ -30,6 +32,8 @@ public enum NetworkError: LocalizedError {
     /// A generic error received from the core networking library.
     /// - Parameter error: The error that was received.
     case underlyingNetworkingError(_ error: Error)
+    
+    // MARK: - LocalizedError
     
     public var errorDescription: String? {
         switch self {
