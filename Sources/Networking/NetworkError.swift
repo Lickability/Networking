@@ -38,7 +38,7 @@ public enum NetworkError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .noData, .noResponse, .decodingError, .underlyingNetworkingError:
-            return NSLocalizedString("Network Error Occurred", comment: "The title of an error alert shown when there is no data or no response from the server.")
+            return NSLocalizedString("Network Error Occurred", comment: "The title of an error alert shown when there is no valid data or no response from the server.")
         case .unsuccessfulStatusCode:
             return NSLocalizedString("Server Error Occurred", comment: "The title of an error alert shown when there is an unexpected server response.")
         }
