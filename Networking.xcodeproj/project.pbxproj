@@ -24,6 +24,7 @@
 		F2B5BC532488378200B6A52A /* RequestBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5BC522488378200B6A52A /* RequestBehavior.swift */; };
 		F2B5BC55248837B400B6A52A /* NetworkRequestPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5BC54248837B400B6A52A /* NetworkRequestPerformer.swift */; };
 		F2B5BC57248837CB00B6A52A /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5BC56248837CB00B6A52A /* NetworkController.swift */; };
+		F2BE3765254CA97E0062C317 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = F2BE3764254CA97E0062C317 /* en.lproj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		F2B5BC522488378200B6A52A /* RequestBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBehavior.swift; sourceTree = "<group>"; };
 		F2B5BC54248837B400B6A52A /* NetworkRequestPerformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestPerformer.swift; sourceTree = "<group>"; };
 		F2B5BC56248837CB00B6A52A /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		F2BE3764254CA97E0062C317 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 		F2BE375B254C95DF0062C317 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F2BE3764254CA97E0062C317 /* en.lproj */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2BE3765254CA97E0062C317 /* en.lproj in Resources */,
 				F2B5BC33248836C600B6A52A /* LaunchScreen.storyboard in Resources */,
 				F2B5BC30248836C600B6A52A /* Preview Assets.xcassets in Resources */,
 				F2B5BC2D248836C600B6A52A /* Assets.xcassets in Resources */,
