@@ -35,33 +35,24 @@ public final class NetworkController {
 
     private func makeDataTask(forURLRequest urlRequest: URLRequest, behaviors: [RequestBehavior] = [], successHTTPStatusCodes: HTTPStatusCodes, completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> URLSessionDataTask {
 
-        return urlSession.dataTask(with: urlRequest) { [weak self] (data, response, error) in
-            guard let self = self else {
-                let result: Result<NetworkResponse, NetworkError> = .failure(.noStrongReferenceToNetworkController)
-                behaviors.requestDidFinish(result: result)
-                completion?(result)
-                return
+        return urlSession.dataTask(with: urlRequest) { data, response, error in
+            let result: Result<NetworkResponse, NetworkError>
+            
+            if let error = error {
+                result = .failure(.underlyingNetworkingError(error))
+            } else if let response = response {
+                if let statusCode = (response as? HTTPURLResponse)?.statusCode, !successHTTPStatusCodes.contains(statusCode: statusCode)  {
+                    result = .failure(.unsuccessfulStatusCode(statusCode: statusCode, data: data?.isEmpty == true ? nil : data))
+                } else {
+                    result = .success(NetworkResponse(data: data, response: response))
+                }
+            } else {
+                result = .failure(.noResponse)
             }
-
-            let result = self.taskResult(fromData: data, response: response, error: error, successHTTPStatusCodes: successHTTPStatusCodes)
 
             behaviors.requestDidFinish(result: result)
 
             completion?(result)
-        }
-    }
-
-    private func taskResult(fromData data: Data?, response: URLResponse?, error: Error?, successHTTPStatusCodes: HTTPStatusCodes) -> Result<NetworkResponse, NetworkError> {
-        if let error = error {
-            return .failure(.underlyingNetworkingError(error))
-        } else if let response = response {
-            if let statusCode = (response as? HTTPURLResponse)?.statusCode, !successHTTPStatusCodes.contains(statusCode: statusCode)  {
-                return .failure(.unsuccessfulStatusCode(statusCode: statusCode, data: data?.isEmpty == true ? nil : data))
-            } else {
-                return .success(NetworkResponse(data: data, response: response))
-            }
-        } else {
-            return .failure(.noResponse)
         }
     }
 }

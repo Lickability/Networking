@@ -1,0 +1,23 @@
+/* A failure reason for an error when an underlying network error occurs. */
+"An underlying error occurred: %@" = "An underlying error occurred: %@";
+
+/* The title of an error alert shown when there is no data or no response from the server. */
+"Network Error Occurred" = "Network Error Occurred";
+
+/* A recovery suggestion for network errors. */
+"Retry" = "Retry";
+
+/* The title of an error alert shown when there is an unexpected server response. */
+"Server Error Occurred" = "Server Error Occurred";
+
+/* A failure reason for an error when no response is provided. */
+"The server could not be reached for a response." = "The server could not be reached for a response.";
+
+/* A failure reason for an error when the server returns an unsuccessful status code. */
+"The server responded with a %@ status code." = "The server responded with a %@ status code.";
+
+/* A failure reason for an error when no data is provided. */
+"The server returned no data." = "The server returned no data.";
+
+/* A failure reason for an error during decoding. */
+"The server’s data was not able to be read." = "The server’s data was not able to be read.";
