@@ -53,7 +53,7 @@ public enum NetworkError: LocalizedError {
         case .decodingError:
             return NSLocalizedString("The server’s data was not able to be read.", comment: "A failure reason for an error during decoding.")
         case let .unsuccessfulStatusCode(statusCode, _):
-            return String.localizedStringWithFormat(NSLocalizedString("The server responded with a %@ status code.", comment: "A failure reason for an error when the server returns an unsuccessful status code."), statusCode)
+            return String.localizedStringWithFormat(NSLocalizedString("The server responded with a %d status code.", comment: "A failure reason for an error when the server returns an unsuccessful status code."), statusCode)
         case let .underlyingNetworkingError(error):
             return String.localizedStringWithFormat(NSLocalizedString("An underlying error occurred: %@", comment: "A failure reason for an error when an underlying network error occurs."), error.localizedDescription)
         }
