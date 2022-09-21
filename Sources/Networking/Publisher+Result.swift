@@ -14,7 +14,7 @@ extension Publisher {
     
     /// Maps the chain of `Output`/`Failure` responses into a `Result` type that contains the `<Output/Failure>.
     /// - Returns: A `Publisher` that has converted the `Output` or `Failure` into a `Result`.
-    public func mapToResult() -> AnyPublisher<Result<Output, Failure>, Never> {
+    public func mapAsResult() -> AnyPublisher<Result<Output, Failure>, Never> {
         map(Result.success)
             .catch { Just(.failure($0)) }
             .eraseToAnyPublisher()

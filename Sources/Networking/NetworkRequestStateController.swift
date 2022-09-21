@@ -98,7 +98,7 @@ public final class NetworkRequestStateController {
         requestStatePublisher.send(.inProgress)
         
         requestPerformer.send(request, requestBehaviors: requestBehaviors)
-            .mapToResult()
+            .mapAsResult()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [requestStatePublisher] result in
                 requestStatePublisher.send(.completed(result))
