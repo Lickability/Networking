@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,7 @@
 		F211601924884A4D00B48D52 /* PhotoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211601824884A4D00B48D52 /* PhotoRequest.swift */; };
 		F211601B24884ABF00B48D52 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211601A24884ABF00B48D52 /* Photo.swift */; };
 		F264BB4E28BE9D6500969CD1 /* NetworkRequestStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264BB4D28BE9D6500969CD1 /* NetworkRequestStateController.swift */; };
-		F264BB5028BE9E1700969CD1 /* Publisher+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264BB4F28BE9E1700969CD1 /* Publisher+Result.swift */; };
+		F29C5EEE28DB8754007C801F /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = F29C5EED28DB8754007C801F /* CombineExt */; };
 		F2B5BC27248836C500B6A52A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5BC26248836C500B6A52A /* AppDelegate.swift */; };
 		F2B5BC29248836C500B6A52A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5BC28248836C500B6A52A /* SceneDelegate.swift */; };
 		F2B5BC2B248836C500B6A52A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5BC2A248836C500B6A52A /* ContentView.swift */; };
@@ -44,7 +44,6 @@
 		F211601824884A4D00B48D52 /* PhotoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequest.swift; sourceTree = "<group>"; };
 		F211601A24884ABF00B48D52 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		F264BB4D28BE9D6500969CD1 /* NetworkRequestStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestStateController.swift; sourceTree = "<group>"; };
-		F264BB4F28BE9E1700969CD1 /* Publisher+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Result.swift"; sourceTree = "<group>"; };
 		F2B5BC23248836C500B6A52A /* Networking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B5BC26248836C500B6A52A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2B5BC28248836C500B6A52A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F29C5EEE28DB8754007C801F /* CombineExt in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +105,6 @@
 				F2B5BC56248837CB00B6A52A /* NetworkController.swift */,
 				4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */,
 				F264BB4D28BE9D6500969CD1 /* NetworkRequestStateController.swift */,
-				F264BB4F28BE9E1700969CD1 /* Publisher+Result.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -194,6 +193,9 @@
 			dependencies = (
 			);
 			name = Networking;
+			packageProductDependencies = (
+				F29C5EED28DB8754007C801F /* CombineExt */,
+			);
 			productName = Networking;
 			productReference = F2B5BC23248836C500B6A52A /* Networking.app */;
 			productType = "com.apple.product-type.application";
@@ -244,6 +246,9 @@
 				Base,
 			);
 			mainGroup = F2B5BC1A248836C500B6A52A;
+			packageReferences = (
+				F29C5EEC28DB8754007C801F /* XCRemoteSwiftPackageReference "CombineExt" */,
+			);
 			productRefGroup = F2B5BC24248836C500B6A52A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -290,7 +295,6 @@
 				F2B5BC512488377600B6A52A /* NetworkResponse.swift in Sources */,
 				F264BB4E28BE9D6500969CD1 /* NetworkRequestStateController.swift in Sources */,
 				F2B5BC29248836C500B6A52A /* SceneDelegate.swift in Sources */,
-				F264BB5028BE9E1700969CD1 /* Publisher+Result.swift in Sources */,
 				F2B5BC2B248836C500B6A52A /* ContentView.swift in Sources */,
 				4C2CBFAC24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift in Sources */,
 				F2B5BC4F2488376C00B6A52A /* NetworkRequest.swift in Sources */,
@@ -559,6 +563,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F29C5EEC28DB8754007C801F /* XCRemoteSwiftPackageReference "CombineExt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineExt.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F29C5EED28DB8754007C801F /* CombineExt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F29C5EEC28DB8754007C801F /* XCRemoteSwiftPackageReference "CombineExt" */;
+			productName = CombineExt;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F2B5BC1B248836C500B6A52A /* Project object */;
 }

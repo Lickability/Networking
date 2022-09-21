@@ -9,5 +9,11 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [.iOS(.v13)],
     products: [.library(name: name, targets: [name])],
-    targets: [.target(name: name, resources: [.process("Resources")])]
+    dependencies: [
+        .package(
+            url: "https://github.com/CombineCommunity/CombineExt.git",
+            .upToNextMajor(from: "1.8.0")
+        )
+    ],
+    targets: [.target(name: name, dependencies: ["CombineExt"], resources: [.process("Resources")])]
 )

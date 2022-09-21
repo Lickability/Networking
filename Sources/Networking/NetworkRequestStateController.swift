@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import CombineExt
 
 /// A class responsible for representing the state and value of a network request being made.
 public final class NetworkRequestStateController {
