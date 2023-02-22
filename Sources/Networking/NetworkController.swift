@@ -61,7 +61,7 @@ extension NetworkController: NetworkRequestPerformer {
     
     // MARK: - NetworkRequestPerformer
     
-    @discardableResult public func send(_ request: NetworkRequest, requestBehaviors: [RequestBehavior] = [], completion: ((Result<NetworkResponse, NetworkError>) -> Void)? = nil) -> URLSessionDataTask {
+    @discardableResult public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], completion: ((Result<NetworkResponse, NetworkError>) -> Void)? = nil) -> URLSessionDataTask {
         let behaviors = defaultRequestBehaviors + requestBehaviors
 
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
@@ -73,7 +73,7 @@ extension NetworkController: NetworkRequestPerformer {
     }
 
     @available(iOS 13.0, *)
-    @discardableResult public func send(_ request: NetworkRequest, requestBehaviors: [RequestBehavior] = []) -> AnyPublisher<NetworkResponse, NetworkError> {
+    @discardableResult public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = []) -> AnyPublisher<NetworkResponse, NetworkError> {
         let behaviors = defaultRequestBehaviors + requestBehaviors
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
         

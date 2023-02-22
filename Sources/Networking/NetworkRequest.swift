@@ -9,7 +9,7 @@
 import Foundation
 
 /// A protocol that defines the parameters that make up a request.
-public protocol NetworkRequest {
+public protocol NetworkRequest: Equatable {
     
     /// The generated `URLRequest` to use for making network requests. Defaults to a url request built using the receiver’s properties.
     var urlRequest: URLRequest { get }
@@ -37,7 +37,7 @@ public protocol NetworkRequest {
 }
 
 /// Represents a collection of possible HTTP status codes.
-public enum HTTPStatusCodes {
+public enum HTTPStatusCodes: Equatable {
     
     /// All status codes.
     case all
@@ -101,5 +101,9 @@ public extension NetworkRequest {
     
     var successHTTPStatusCodes: HTTPStatusCodes {
         return .ranges([200...299])
+    }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.urlRequest == rhs.urlRequest && lhs.successHTTPStatusCodes == rhs.successHTTPStatusCodes
     }
 }

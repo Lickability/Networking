@@ -94,7 +94,7 @@ public final class NetworkRequestStateController {
     /// - Parameters:
     ///   - request: The request to send.
     ///   - requestBehaviors: Additional behaviors to append to the request.
-    public func send(request: NetworkRequest, requestBehaviors: [RequestBehavior] = []) {
+    public func send(request: any NetworkRequest, requestBehaviors: [RequestBehavior] = []) {
         requestStatePublisher.send(.inProgress)
         
         requestPerformer.send(request, requestBehaviors: requestBehaviors)
