@@ -10,6 +10,7 @@
 		4C2CBFAC24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */; };
 		F211601924884A4D00B48D52 /* PhotoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211601824884A4D00B48D52 /* PhotoRequest.swift */; };
 		F211601B24884ABF00B48D52 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211601A24884ABF00B48D52 /* Photo.swift */; };
+		F25AECBA29F4941800DF5437 /* ErrorInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25AECB929F4941800DF5437 /* ErrorInformation.swift */; };
 		F264BB4E28BE9D6500969CD1 /* NetworkRequestStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264BB4D28BE9D6500969CD1 /* NetworkRequestStateController.swift */; };
 		F264BB5028BE9E1700969CD1 /* Publisher+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264BB4F28BE9E1700969CD1 /* Publisher+Result.swift */; };
 		F2B5BC27248836C500B6A52A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5BC26248836C500B6A52A /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkRequestPerformer+JSON.swift"; sourceTree = "<group>"; };
 		F211601824884A4D00B48D52 /* PhotoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequest.swift; sourceTree = "<group>"; };
 		F211601A24884ABF00B48D52 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		F25AECB929F4941800DF5437 /* ErrorInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInformation.swift; sourceTree = "<group>"; };
 		F264BB4D28BE9D6500969CD1 /* NetworkRequestStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestStateController.swift; sourceTree = "<group>"; };
 		F264BB4F28BE9E1700969CD1 /* Publisher+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Result.swift"; sourceTree = "<group>"; };
 		F2B5BC23248836C500B6A52A /* Networking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,7 @@
 				F2B5BC56248837CB00B6A52A /* NetworkController.swift */,
 				4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */,
 				F264BB4D28BE9D6500969CD1 /* NetworkRequestStateController.swift */,
+				F25AECB929F4941800DF5437 /* ErrorInformation.swift */,
 				F264BB4F28BE9E1700969CD1 /* Publisher+Result.swift */,
 			);
 			path = Networking;
@@ -281,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F211601B24884ABF00B48D52 /* Photo.swift in Sources */,
+				F25AECBA29F4941800DF5437 /* ErrorInformation.swift in Sources */,
 				F2B5BC57248837CB00B6A52A /* NetworkController.swift in Sources */,
 				F2B5BC49248836F300B6A52A /* HTTPMethod.swift in Sources */,
 				F2B5BC532488378200B6A52A /* RequestBehavior.swift in Sources */,

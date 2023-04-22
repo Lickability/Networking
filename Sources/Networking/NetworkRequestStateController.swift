@@ -22,7 +22,7 @@ public final class NetworkRequestStateController {
         case inProgress
         
         /// A request that has been completed with an associated result.
-        case completed(Result<NetworkResponse, NetworkError>)
+        case completed(Result<NetworkResponse, NetworkError>, Bool)
         
         /// A `Bool` representing if a request is in progress.
         public var isInProgress: Bool {
@@ -35,11 +35,13 @@ public final class NetworkRequestStateController {
         }
         
         /// The completed `LocalizedError`, if one exists.
+        /// This property is deprecated.
+        @available(*, deprecated, message: "Please use completedErrorInformation instead.")
         public var completedError: LocalizedError? {
             switch self {
             case .notInProgress, .inProgress:
                 return nil
-            case let .completed(result):
+            case let .completed(result, _):
                 switch result {
                 case .success:
                     return nil
@@ -49,12 +51,27 @@ public final class NetworkRequestStateController {
             }
         }
         
+        /// The completed `ErrorInformation`, if one exists.
+        public var completedErrorInformation: ErrorInformation? {
+            switch self {
+            case .notInProgress, .inProgress:
+                return nil
+            case let .completed(result, flag):
+                switch result {
+                case .success:
+                    return nil
+                case let .failure(networkError):
+                    return ErrorInformation(error: networkError, flag: flag)
+                }
+            }
+        }
+        
         /// The completed `NetworkResponse`, if one exists.
         public var completedResponse: NetworkResponse? {
             switch self {
             case .notInProgress, .inProgress:
                 return nil
-            case let .completed(result):
+            case let .completed(result, _):
                 switch result {
                 case let .success(response):
                     return response
@@ -71,7 +88,7 @@ public final class NetworkRequestStateController {
         
         /// A `Bool` indicating if the request has finished with an error.
         public var didFail: Bool {
-            return completedError != nil
+            return completedErrorInformation != nil
         }
     }
     
@@ -94,7 +111,9 @@ public final class NetworkRequestStateController {
     /// - Parameters:
     ///   - request: The request to send.
     ///   - requestBehaviors: Additional behaviors to append to the request.
-    public func send(request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], retryCount: Int = 2) {
+    ///   - retryCount: The number of retries the request will make.
+    ///   - flag: A `Bool` flag that follows the request through completion.
+    public func send(request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], retryCount: Int = 2, flag: Bool = false) {
         requestStatePublisher.send(.inProgress)
         
         requestPerformer.send(request, requestBehaviors: requestBehaviors)
@@ -102,7 +121,7 @@ public final class NetworkRequestStateController {
             .mapAsResult()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [requestStatePublisher] result in
-                requestStatePublisher.send(.completed(result))
+                requestStatePublisher.send(.completed(result, flag))
             })
             .store(in: &cancellables)
     }
