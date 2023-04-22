@@ -16,4 +16,13 @@ public struct ErrorInformation {
     
     /// A flag that is associated with the request that generated the error.
     public let flag: Bool
+    
+    /// Initializes an `ErrorInformation` with the provided parameters.
+    /// - Parameters:
+    ///   - error: The error to initialize with.
+    ///   - flag: The flag associated with the request that generated the error.
+    public init(error: LocalizedError, flag: Bool) {
+        self.error = error
+        self.flag = flag
+    }
 }
