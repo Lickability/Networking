@@ -34,7 +34,6 @@ public protocol NetworkRequestPerformer {
     /// - Parameters:
     ///   - request: The request to perform.
     ///   - requestBehaviors: The behaviors to apply to the given request.
-    ///   - decoder: The JSON decoder to use when decoding the data.
-    /// - Returns: A JSON-decoded object.
-    func send<ResponseType: Decodable>(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior], decoder: JSONDecoder) async throws -> ResponseType
+    /// - Returns: A network response object.
+    func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) async throws -> NetworkResponse
 }
