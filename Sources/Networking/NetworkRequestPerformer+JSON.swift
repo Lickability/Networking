@@ -37,4 +37,24 @@ extension NetworkRequestPerformer {
             }
         }
     }
+    
+    /// Performs the given request with the given behaviors returning a JSON-decoded object with async/await, or throwing an error if unsuccessful.
+    ///
+    /// - Parameters:
+    ///   - request: The request to perform.
+    ///   - requestBehaviors: The behaviors to apply to the given request.
+    ///   - decoder: The JSON decoder to use when decoding the data.
+    /// - Returns: A JSON-decoded object.
+    public func send<ResponseType: Decodable>(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], decoder: JSONDecoder = JSONDecoder()) async throws -> ResponseType {
+          return try await withCheckedThrowingContinuation { continuation in
+              send(request, requestBehaviors: requestBehaviors, decoder: decoder) { (result: Result<ResponseType, NetworkError>) in
+                  switch result {
+                  case .success(let value):
+                      continuation.resume(returning: value)
+                  case .failure(let error):
+                      continuation.resume(throwing: error)
+                  }
+              }
+          }
+      }
 }
