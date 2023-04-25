@@ -98,4 +98,17 @@ extension NetworkController: NetworkRequestPerformer {
             })
             .eraseToAnyPublisher()
     }
+    
+    public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) async throws -> NetworkResponse {
+        try await withUnsafeThrowingContinuation { continuation in
+            send(request) { result in
+                switch result {
+                case let .success(response):
+                    continuation.resume(returning: response)
+                case let .failure(failure):
+                    continuation.resume(throwing: failure)
+                }
+            }
+        }
+    }
 }
