@@ -28,4 +28,12 @@ public protocol NetworkRequestPerformer {
     /// - Returns: Returns a publisher that can be subscribed to, that performs the given request with the given behaviors.
     @available(iOS 13.0, *)
     @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) -> AnyPublisher<NetworkResponse, NetworkError>
+    
+    /// Performs the given request with the given behaviors returning a `NetworkResponse` with async/await, or throwing an error if unsuccessful.
+    ///
+    /// - Parameters:
+    ///   - request: The request to perform.
+    ///   - requestBehaviors: The behaviors to apply to the given request.
+    /// - Returns: A network response object.
+    func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) async throws -> NetworkResponse
 }
