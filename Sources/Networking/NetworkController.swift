@@ -55,6 +55,14 @@ public final class NetworkController {
             completion?(result)
         }
     }
+    
+    private func makeNetworkResponse(from request: any NetworkRequest, data: Data?, response: URLResponse) throws -> NetworkResponse {
+        if let statusCode = (response as? HTTPURLResponse)?.statusCode, !request.successHTTPStatusCodes.contains(statusCode: statusCode) {
+            throw NetworkError.unsuccessfulStatusCode(statusCode: statusCode, data: data?.isEmpty == true ? nil : data)
+        } else {
+            return NetworkResponse(data: data, response: response)
+        }
+    }
 }
 
 extension NetworkController: NetworkRequestPerformer {
@@ -79,12 +87,11 @@ extension NetworkController: NetworkRequestPerformer {
         
         return urlSession.dataTaskPublisher(for: urlRequest)
             .mapError { NetworkError.underlyingNetworkingError($0) }
-            .tryMap { data, response in
-                if let statusCode = (response as? HTTPURLResponse)?.statusCode, !request.successHTTPStatusCodes.contains(statusCode: statusCode) {
-                    throw NetworkError.unsuccessfulStatusCode(statusCode: statusCode, data: data.isEmpty ? nil : data)
-                } else {
-                    return NetworkResponse(data: data, response: response)
+            .tryMap { [weak self] data, response in
+                guard let response = try self?.makeNetworkResponse(from: request, data: data, response: response) else {
+                    throw NetworkError.noResponse
                 }
+                return response
             }
             .mapError { ($0 as? NetworkError) ?? .underlyingNetworkingError($0) }
             .handleEvents(receiveOutput: { response in
@@ -100,15 +107,24 @@ extension NetworkController: NetworkRequestPerformer {
     }
     
     public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) async throws -> NetworkResponse {
-        try await withUnsafeThrowingContinuation { continuation in
-            send(request) { result in
-                switch result {
-                case let .success(response):
-                    continuation.resume(returning: response)
-                case let .failure(failure):
-                    continuation.resume(throwing: failure)
-                }
+        let behaviors = defaultRequestBehaviors + requestBehaviors
+        let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
+        
+        let (data, response) = try await urlSession.data(for: urlRequest)
+        
+        do {
+            let networkResponse = try makeNetworkResponse(from: request, data: data, response: response)
+            behaviors.requestDidFinish(result: .success(networkResponse))
+            return networkResponse
+        } catch {
+            let networkError: NetworkError
+            if let error = error as? NetworkError {
+                networkError = error
+            } else {
+                networkError = NetworkError.underlyingNetworkingError(error)
             }
+            behaviors.requestDidFinish(result: .failure(networkError))
+            throw networkError
         }
     }
 }
