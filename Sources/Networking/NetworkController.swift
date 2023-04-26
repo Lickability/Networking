@@ -100,7 +100,7 @@ extension NetworkController: NetworkRequestPerformer {
     }
     
     public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) async throws -> NetworkResponse {
-        try await withUnsafeThrowingContinuation { continuation in
+        try await withCheckedThrowingContinuation { continuation in
             send(request) { result in
                 switch result {
                 case let .success(response):
