@@ -46,15 +46,14 @@ extension NetworkRequestPerformer {
     ///   - decoder: The JSON decoder to use when decoding the data.
     /// - Returns: A JSON-decoded object.
     public func send<ResponseType: Decodable>(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], decoder: JSONDecoder = JSONDecoder()) async throws -> ResponseType {
-        return try await withCheckedThrowingContinuation { continuation in
-            send(request, requestBehaviors: requestBehaviors, decoder: decoder) { (result: Result<ResponseType, NetworkError>) in
-                switch result {
-                case .success(let value):
-                    continuation.resume(returning: value)
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
+        let response = try await send(request, requestBehaviors: requestBehaviors)
+        guard let data = response.data else {
+            throw NetworkError.noData
+        }
+        do {
+            return try decoder.decode(ResponseType.self, from: data)
+        } catch {
+            throw NetworkError.decodingError(error)
         }
     }
 }
