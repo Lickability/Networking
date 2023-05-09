@@ -12,16 +12,16 @@ import Combine
 /// A default concrete implementation of the `NetworkRequestPerformer`.
 public final class NetworkController {
 
-    private let urlSession: URLSession
+    private let networkSession: NetworkSession
     private let defaultRequestBehaviors: [RequestBehavior]
 
     /// Initializes the `NetworkController`.
     ///
     /// - Parameters:
-    ///   - urlSession: The `URLSession` to use to make requests. Defaults to `URLSession.shared`.
+    ///   - networkSession: The `NetworkSession` to use to make requests. Defaults to `URLSession.shared`.
     ///   - defaultRequestBehaviors: The request behaviors to apply to all requests made through this controller. Defaults to an empty array.
-    public init(urlSession: URLSession = .shared, defaultRequestBehaviors: [RequestBehavior] = []) {
-        self.urlSession = urlSession
+    public init(networkSession: NetworkSession = URLSession.shared, defaultRequestBehaviors: [RequestBehavior] = []) {
+        self.networkSession = networkSession
         self.defaultRequestBehaviors = defaultRequestBehaviors
     }
     
@@ -35,7 +35,7 @@ public final class NetworkController {
 
     private func makeDataTask(forURLRequest urlRequest: URLRequest, behaviors: [RequestBehavior] = [], successHTTPStatusCodes: HTTPStatusCodes, completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> URLSessionDataTask {
 
-        return urlSession.dataTask(with: urlRequest) { data, response, error in
+        return networkSession.dataTask(with: urlRequest) { data, response, error in
             let result: Result<NetworkResponse, NetworkError>
             
             if let error = error {
@@ -77,7 +77,7 @@ extension NetworkController: NetworkRequestPerformer {
         let behaviors = defaultRequestBehaviors + requestBehaviors
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
         
-        return urlSession.dataTaskPublisher(for: urlRequest)
+        return networkSession.dataTaskPublisher(for: urlRequest)
             .mapError { NetworkError.underlyingNetworkingError($0) }
             .tryMap { data, response in
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode, !request.successHTTPStatusCodes.contains(statusCode: statusCode) {
@@ -101,7 +101,7 @@ extension NetworkController: NetworkRequestPerformer {
     
     public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) async throws -> NetworkResponse {
         try await withCheckedThrowingContinuation { continuation in
-            send(request) { result in
+            send(request, requestBehaviors: requestBehaviors) { result in
                 switch result {
                 case let .success(response):
                     continuation.resume(returning: response)
