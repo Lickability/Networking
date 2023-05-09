@@ -19,7 +19,7 @@ public protocol NetworkSession {
     /// - Returns: The new session data task.
     ///
     /// - Note: This documentation is pulled directly from `URLSession`.
-    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+    func makeDataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> NetworkSessionDataTask
 
     /// Returns a publisher that wraps a URL session data task for a given URL request.
     ///
@@ -31,4 +31,14 @@ public protocol NetworkSession {
     func dataTaskPublisher(for request: URLRequest) -> URLSession.DataTaskPublisher
 }
 
-extension URLSession: NetworkSession { }
+extension URLSession: NetworkSession {
+    public func makeDataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> NetworkSessionDataTask {
+        return dataTask(with: request, completionHandler: completionHandler)
+    }
+}
+
+public protocol NetworkSessionDataTask {
+    func resume()
+}
+
+extension URLSessionDataTask: NetworkSessionDataTask { }

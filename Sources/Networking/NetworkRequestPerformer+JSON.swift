@@ -17,8 +17,8 @@ extension NetworkRequestPerformer {
     ///   - requestBehaviors: The behaviors to apply to the given request.
     ///   - decoder: The JSON decoder to use when decoding the data.
     ///   - completion: A completion closure that is called when the request has been completed.
-    /// - Returns: The `URLSessionDataTask` used to send the request. The implementation must call `resume()` on the task before returning.
-    @discardableResult public func send<ResponseType: Decodable>(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], decoder: JSONDecoder = JSONDecoder(), completion: ((Result<ResponseType, NetworkError>) -> Void)? = nil) -> URLSessionDataTask {
+    /// - Returns: The `NetworkSessionDataTask` used to send the request. The implementation must call `resume()` on the task before returning.
+    @discardableResult public func send<ResponseType: Decodable>(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], decoder: JSONDecoder = JSONDecoder(), completion: ((Result<ResponseType, NetworkError>) -> Void)? = nil) -> NetworkSessionDataTask {
         send(request, requestBehaviors: requestBehaviors) { result in
             switch result {
             case let .success(response):

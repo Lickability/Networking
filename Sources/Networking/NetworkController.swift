@@ -33,9 +33,9 @@ public final class NetworkController {
         return urlRequest
     }
 
-    private func makeDataTask(forURLRequest urlRequest: URLRequest, behaviors: [RequestBehavior] = [], successHTTPStatusCodes: HTTPStatusCodes, completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> URLSessionDataTask {
+    private func makeDataTask(forURLRequest urlRequest: URLRequest, behaviors: [RequestBehavior] = [], successHTTPStatusCodes: HTTPStatusCodes, completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> NetworkSessionDataTask {
 
-        return networkSession.dataTask(with: urlRequest) { data, response, error in
+        return networkSession.makeDataTask(with: urlRequest) { data, response, error in
             let result: Result<NetworkResponse, NetworkError>
             
             if let error = error {
@@ -61,7 +61,7 @@ extension NetworkController: NetworkRequestPerformer {
     
     // MARK: - NetworkRequestPerformer
     
-    @discardableResult public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], completion: ((Result<NetworkResponse, NetworkError>) -> Void)? = nil) -> URLSessionDataTask {
+    @discardableResult public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], completion: ((Result<NetworkResponse, NetworkError>) -> Void)? = nil) -> NetworkSessionDataTask {
         let behaviors = defaultRequestBehaviors + requestBehaviors
 
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
