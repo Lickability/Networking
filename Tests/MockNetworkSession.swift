@@ -25,10 +25,10 @@ class MockNetworkSession: NetworkSession {
         return MockNetworkSessionDataTask { [weak self] in
             switch self?.result {
             case .success(let data):
-                let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)
+                let response = request.url.flatMap { HTTPURLResponse(url: $0, statusCode: 200, httpVersion: nil, headerFields: nil) }
                 completionHandler(data, response, nil)
             case .failure(let error):
-                let response = HTTPURLResponse(url: request.url!, statusCode: 0, httpVersion: nil, headerFields: nil)
+                let response = request.url.flatMap { HTTPURLResponse(url: $0, statusCode: 0, httpVersion: nil, headerFields: nil) }
                 completionHandler(nil, response, error)
             case .none:
                 assertionFailure("`MockNetworkSession` went out of scope. Keep a reference to it for the duration of your tests.")
