@@ -32,13 +32,10 @@ public protocol NetworkSession {
 }
 
 extension URLSession: NetworkSession {
+
+    // MARK: - NetworkSession
+
     public func makeDataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> NetworkSessionDataTask {
         return dataTask(with: request, completionHandler: completionHandler)
     }
 }
-
-public protocol NetworkSessionDataTask {
-    func resume()
-}
-
-extension URLSessionDataTask: NetworkSessionDataTask { }

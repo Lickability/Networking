@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B96DC552A0AB67B00FF0499 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96DC542A0AB67B00FF0499 /* NetworkSession.swift */; };
 		0B96DC572A0AB91B00FF0499 /* MockNetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96DC562A0AB91B00FF0499 /* MockNetworkSession.swift */; };
+		0B96DC5A2A0AC7E800FF0499 /* NetworkSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96DC582A0AC7A800FF0499 /* NetworkSessionDataTask.swift */; };
 		4C2CBFAC24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */; };
 		F211601924884A4D00B48D52 /* PhotoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211601824884A4D00B48D52 /* PhotoRequest.swift */; };
 		F211601B24884ABF00B48D52 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211601A24884ABF00B48D52 /* Photo.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		0B96DC542A0AB67B00FF0499 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		0B96DC562A0AB91B00FF0499 /* MockNetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkSession.swift; sourceTree = "<group>"; };
+		0B96DC582A0AC7A800FF0499 /* NetworkSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionDataTask.swift; sourceTree = "<group>"; };
 		4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkRequestPerformer+JSON.swift"; sourceTree = "<group>"; };
 		F211601824884A4D00B48D52 /* PhotoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequest.swift; sourceTree = "<group>"; };
 		F211601A24884ABF00B48D52 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				F2B5BC54248837B400B6A52A /* NetworkRequestPerformer.swift */,
 				F2B5BC56248837CB00B6A52A /* NetworkController.swift */,
 				0B96DC542A0AB67B00FF0499 /* NetworkSession.swift */,
+				0B96DC582A0AC7A800FF0499 /* NetworkSessionDataTask.swift */,
 				4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */,
 				F264BB4D28BE9D6500969CD1 /* NetworkRequestStateController.swift */,
 				F264BB4F28BE9E1700969CD1 /* Publisher+Result.swift */,
@@ -289,6 +292,7 @@
 				F211601B24884ABF00B48D52 /* Photo.swift in Sources */,
 				F2B5BC57248837CB00B6A52A /* NetworkController.swift in Sources */,
 				F2B5BC49248836F300B6A52A /* HTTPMethod.swift in Sources */,
+				0B96DC5A2A0AC7E800FF0499 /* NetworkSessionDataTask.swift in Sources */,
 				F2B5BC532488378200B6A52A /* RequestBehavior.swift in Sources */,
 				F2B5BC55248837B400B6A52A /* NetworkRequestPerformer.swift in Sources */,
 				F2B5BC27248836C500B6A52A /* AppDelegate.swift in Sources */,
