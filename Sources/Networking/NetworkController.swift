@@ -65,7 +65,7 @@ extension NetworkController: NetworkRequestPerformer {
         let behaviors = defaultRequestBehaviors + requestBehaviors
 
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
-        let dataTask = makeDataTask(forURLRequest: urlRequest, successHTTPStatusCodes: request.successHTTPStatusCodes, completion: completion)
+        let dataTask = makeDataTask(forURLRequest: urlRequest, behaviors: behaviors, successHTTPStatusCodes: request.successHTTPStatusCodes, completion: completion)
 
         dataTask.resume()
 
