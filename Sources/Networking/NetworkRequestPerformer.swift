@@ -18,8 +18,8 @@ public protocol NetworkRequestPerformer {
     ///   - request: The request to perform.
     ///   - requestBehaviors: The behaviors to apply to the given request.
     ///   - completion: A completion closure that is called when the request has been completed.
-    /// - Returns: The `URLSessionDataTask` used to send the request. The implementation must call `resume()` on the task before returning.
-    @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior], completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> URLSessionDataTask
+    /// - Returns: The `NetworkSessionDataTask` used to send the request. The implementation must call `resume()` on the task before returning.
+    @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior], completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> NetworkSessionDataTask
 
     /// Returns a publisher that can be subscribed to, that performs the given request with the given behaviors.
     /// - Parameters:
