@@ -9,7 +9,7 @@
 import Foundation
 import Networking
 
-/// A mocked version of `NetworkSession` to be used in tests. Allows specification of specific success or failure cases.
+/// A mocked version of `NetworkSession` to be used in tests. Allows specification of success or failure cases.
 class MockNetworkSession: NetworkSession {
     private let result: Result<Data, Error>
 
