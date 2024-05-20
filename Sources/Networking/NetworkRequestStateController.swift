@@ -93,14 +93,16 @@ public final class NetworkRequestStateController {
     /// Sends a request with the specified parameters.
     /// - Parameters:
     ///   - request: The request to send.
+    ///   - scheduler: The scheduler to receive the call on. The default value is `DispatchQueue.main`.
     ///   - requestBehaviors: Additional behaviors to append to the request.
-    public func send(request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], retryCount: Int = 2) {
+    ///   - retryCount: The number of times the action can be retried.
+    public func send(request: any NetworkRequest, scheduler: some Scheduler = DispatchQueue.main, requestBehaviors: [RequestBehavior] = [], retryCount: Int = 2) {
         requestStatePublisher.send(.inProgress)
         
         requestPerformer.send(request, requestBehaviors: requestBehaviors)
             .retry(retryCount)
             .mapAsResult()
-            .receive(on: DispatchQueue.main)
+            .receive(on: scheduler)
             .sink(receiveValue: { [requestStatePublisher] result in
                 requestStatePublisher.send(.completed(result))
             })
