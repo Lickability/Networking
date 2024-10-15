@@ -10,7 +10,12 @@ import Foundation
 
 /// Describes a network session task that can be performed. This protocol has a similar API to `URLSessionDataTask` for the purpose of mocking.
 public protocol NetworkSessionDataTask {
-
+    
+    /// Progress object which represents the task progress. It can be used for task progress tracking.
+    ///
+    /// - Note: This documentation is pulled directly from `URLSessionTask`.
+    var progress: Progress { get }
+    
     /// Resumes the task, if it is suspended.
     ///
     /// - Note: This documentation is pulled directly from `URLSessionTask`.
