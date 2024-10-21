@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import Combine
+@preconcurrency import Combine
 
 /// A class responsible for representing the state and value of a network request being made.
-public final class NetworkRequestStateController {
+public final class NetworkRequestStateController: Sendable {
     
     /// The state of a network request's lifecycle.
     public enum NetworkRequestState {
@@ -76,18 +76,18 @@ public final class NetworkRequestStateController {
     }
     
     /// A `Publisher` that can be subscribed to in order to receive updates about the status of a request.
-    public private(set) lazy var publisher: AnyPublisher<NetworkRequestState, Never> = {
-        return requestStatePublisher.prepend(.notInProgress).eraseToAnyPublisher()
-    }()
+    public let publisher: AnyPublisher<NetworkRequestState, Never>
     
     private let requestPerformer: NetworkRequestPerformer
-    private let requestStatePublisher = PassthroughSubject<NetworkRequestState, Never>()
-    private var cancellables = Set<AnyCancellable>()
+    private let requestStatePublisher: PassthroughSubject<NetworkRequestState, Never>
+    nonisolated(unsafe) private var cancellables = Set<AnyCancellable>()
     
     /// Initializes the `NetworkRequestStateController` with the specified parameters.
     /// - Parameter requestPerformer: The `NetworkRequestPerformer` used to make requests.
     public init(requestPerformer: NetworkRequestPerformer) {
+        self.requestStatePublisher = PassthroughSubject<NetworkRequestState, Never>()
         self.requestPerformer = requestPerformer
+        self.publisher = requestStatePublisher.prepend(.notInProgress).eraseToAnyPublisher()
     }
         
     /// Sends a request with the specified parameters.

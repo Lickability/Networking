@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 /// A default concrete implementation of the `NetworkRequestPerformer`.
-public final class NetworkController {
+public final class NetworkController: Sendable {
 
     private let networkSession: NetworkSession
     private let defaultRequestBehaviors: [RequestBehavior]
@@ -33,7 +33,7 @@ public final class NetworkController {
         return urlRequest
     }
 
-    private func makeDataTask(forURLRequest urlRequest: URLRequest, behaviors: [RequestBehavior] = [], successHTTPStatusCodes: HTTPStatusCodes, completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> NetworkSessionDataTask {
+    private func makeDataTask(forURLRequest urlRequest: URLRequest, behaviors: [RequestBehavior] = [], successHTTPStatusCodes: HTTPStatusCodes, completion: (@Sendable (Result<NetworkResponse, NetworkError>) -> Void)?) -> NetworkSessionDataTask {
 
         return networkSession.makeDataTask(with: urlRequest) { data, response, error in
             let result: Result<NetworkResponse, NetworkError>
@@ -61,7 +61,7 @@ extension NetworkController: NetworkRequestPerformer {
     
     // MARK: - NetworkRequestPerformer
     
-    @discardableResult public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], completion: ((Result<NetworkResponse, NetworkError>) -> Void)? = nil) -> NetworkSessionDataTask {
+    @discardableResult public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = [], completion: (@Sendable (Result<NetworkResponse, NetworkError>) -> Void)? = nil) -> NetworkSessionDataTask {
         let behaviors = defaultRequestBehaviors + requestBehaviors
 
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)

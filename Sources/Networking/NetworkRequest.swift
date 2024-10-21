@@ -9,7 +9,7 @@
 import Foundation
 
 /// A protocol that defines the parameters that make up a request.
-public protocol NetworkRequest: Equatable {
+public protocol NetworkRequest: Equatable, Sendable {
     
     /// The generated `URLRequest` to use for making network requests. Defaults to a url request built using the receiver’s properties.
     var urlRequest: URLRequest { get }

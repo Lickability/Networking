@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 /// A protocol that defines functions needed to perform requests.
-public protocol NetworkRequestPerformer {
+public protocol NetworkRequestPerformer: Sendable {
     
     /// Performs the given request with the given behaviors.
     ///
@@ -19,7 +19,7 @@ public protocol NetworkRequestPerformer {
     ///   - requestBehaviors: The behaviors to apply to the given request.
     ///   - completion: A completion closure that is called when the request has been completed.
     /// - Returns: The `NetworkSessionDataTask` used to send the request. The implementation must call `resume()` on the task before returning.
-    @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior], completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> NetworkSessionDataTask
+    @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior], completion: (@Sendable (Result<NetworkResponse, NetworkError>) -> Void)?) -> NetworkSessionDataTask
 
     /// Returns a publisher that can be subscribed to, that performs the given request with the given behaviors.
     /// - Parameters:

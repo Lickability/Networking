@@ -9,7 +9,7 @@
 import Foundation
 
 /// A protocol that can be used to implement behavior for requests being made.
-public protocol RequestBehavior {
+public protocol RequestBehavior: Sendable {
     
     /// A function that is called before a request is sent. You may modify the request at this time.
     ///
