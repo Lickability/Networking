@@ -37,7 +37,7 @@ public protocol NetworkRequest: Equatable, Sendable {
 }
 
 /// Represents a collection of possible HTTP status codes.
-public enum HTTPStatusCodes: Equatable {
+public enum HTTPStatusCodes: Equatable, Sendable {
     
     /// All status codes.
     case all
