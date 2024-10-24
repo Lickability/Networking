@@ -72,12 +72,13 @@ extension NetworkController: NetworkRequestPerformer {
         return dataTask
     }
 
-    @available(iOS 13.0, *)
-    @discardableResult public func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior] = []) -> AnyPublisher<NetworkResponse, NetworkError> {
+    @MainActor
+    @discardableResult public func send(_ request: any NetworkRequest, scheduler: some Scheduler = DispatchQueue.main, requestBehaviors: [RequestBehavior] = []) -> AnyPublisher<NetworkResponse, NetworkError> {
         let behaviors = defaultRequestBehaviors + requestBehaviors
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
         
         return networkSession.dataTaskPublisher(for: urlRequest)
+            .receive(on: scheduler)
             .mapError { NetworkError.underlyingNetworkingError($0) }
             .tryMap { data, response in
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode, !request.successHTTPStatusCodes.contains(statusCode: statusCode) {

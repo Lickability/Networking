@@ -80,6 +80,7 @@ public final class NetworkRequestStateController: Sendable {
     
     private let requestPerformer: NetworkRequestPerformer
     private let requestStatePublisher: PassthroughSubject<NetworkRequestState, Never>
+    private let cancellablesQueue = DispatchQueue(label: "net.lickability.Networking.NetworkRequestStateController.cancellable.queue")
     nonisolated(unsafe) private var cancellables = Set<AnyCancellable>()
     
     /// Initializes the `NetworkRequestStateController` with the specified parameters.
@@ -93,26 +94,32 @@ public final class NetworkRequestStateController: Sendable {
     /// Sends a request with the specified parameters.
     /// - Parameters:
     ///   - request: The request to send.
-    ///   - scheduler: The scheduler to receive the call on. The default value is `DispatchQueue.main`.
+    ///   - scheduler: The scheduler to receive the call on. The scheduler passed in must match the `@MainActor` requirement to avoid data races. The default value is `DispatchQueue.main`.
     ///   - requestBehaviors: Additional behaviors to append to the request.
     ///   - retryCount: The number of times the action can be retried.
+    @MainActor
     public func send(request: any NetworkRequest, scheduler: some Scheduler = DispatchQueue.main, requestBehaviors: [RequestBehavior] = [], retryCount: Int = 2) {
         requestStatePublisher.send(.inProgress)
         
-        requestPerformer.send(request, requestBehaviors: requestBehaviors)
+        let cancellable = requestPerformer.send(request, scheduler: scheduler, requestBehaviors: requestBehaviors)
             .retry(retryCount)
             .mapAsResult()
             .receive(on: scheduler)
             .sink(receiveValue: { [requestStatePublisher] result in
                 requestStatePublisher.send(.completed(result))
             })
-            .store(in: &cancellables)
+        
+        _ = cancellablesQueue.sync {
+            cancellables.insert(cancellable)
+        }
     }
     
     /// Resets the state of the `requestStatePublisher` and cancels any in flight requests that may be ongoing. Cancellation is not guaranteed, and requests that are near completion may end up finishing, despite being cancelled.
     public func resetState() {
-        cancellables.forEach { $0.cancel() }
-        cancellables.removeAll()
+        cancellablesQueue.sync {
+            cancellables.forEach { $0.cancel() }
+            cancellables.removeAll()
+        }
         
         requestStatePublisher.send(.notInProgress)
     }

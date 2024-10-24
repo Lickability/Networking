@@ -24,10 +24,11 @@ public protocol NetworkRequestPerformer: Sendable {
     /// Returns a publisher that can be subscribed to, that performs the given request with the given behaviors.
     /// - Parameters:
     ///   - request: The request to perform.
+    ///   - scheduler: The scheduler to receive the call on. The scheduler passed in must match the `@MainActor` requirement to avoid data races.
     ///   - requestBehaviors: The behaviors to apply to the given request.
     /// - Returns: Returns a publisher that can be subscribed to, that performs the given request with the given behaviors.
-    @available(iOS 13.0, *)
-    @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) -> AnyPublisher<NetworkResponse, NetworkError>
+    @MainActor
+    @discardableResult func send(_ request: any NetworkRequest, scheduler: some Scheduler, requestBehaviors: [RequestBehavior]) -> AnyPublisher<NetworkResponse, NetworkError>
     
     /// Performs the given request with the given behaviors returning a `NetworkResponse` with async/await, or throwing an error if unsuccessful.
     ///
