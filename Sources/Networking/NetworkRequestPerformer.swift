@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 /// A protocol that defines functions needed to perform requests.
-public protocol NetworkRequestPerformer {
+public protocol NetworkRequestPerformer: Sendable {
     
     /// Performs the given request with the given behaviors.
     ///
@@ -19,15 +19,16 @@ public protocol NetworkRequestPerformer {
     ///   - requestBehaviors: The behaviors to apply to the given request.
     ///   - completion: A completion closure that is called when the request has been completed.
     /// - Returns: The `NetworkSessionDataTask` used to send the request. The implementation must call `resume()` on the task before returning.
-    @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior], completion: ((Result<NetworkResponse, NetworkError>) -> Void)?) -> NetworkSessionDataTask
+    @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior], completion: (@Sendable (Result<NetworkResponse, NetworkError>) -> Void)?) -> NetworkSessionDataTask
 
     /// Returns a publisher that can be subscribed to, that performs the given request with the given behaviors.
     /// - Parameters:
     ///   - request: The request to perform.
+    ///   - scheduler: The scheduler to receive the call on. The scheduler passed in must match the `@MainActor` requirement to avoid data races.
     ///   - requestBehaviors: The behaviors to apply to the given request.
     /// - Returns: Returns a publisher that can be subscribed to, that performs the given request with the given behaviors.
-    @available(iOS 13.0, *)
-    @discardableResult func send(_ request: any NetworkRequest, requestBehaviors: [RequestBehavior]) -> AnyPublisher<NetworkResponse, NetworkError>
+    @MainActor
+    @discardableResult func send(_ request: any NetworkRequest, scheduler: some Scheduler, requestBehaviors: [RequestBehavior]) -> AnyPublisher<NetworkResponse, NetworkError>
     
     /// Performs the given request with the given behaviors returning a `NetworkResponse` with async/await, or throwing an error if unsuccessful.
     ///

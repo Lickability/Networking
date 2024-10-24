@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 /// Describes an object that coordinates a group of related, network data transfer tasks. This protocol has a similar API to `URLSession` for the purpose of mocking.
-public protocol NetworkSession {
+public protocol NetworkSession: Sendable {
 
     /// Creates a task that retrieves the contents of a URL based on the specified URL request object, and calls a handler upon completion.
     /// - Parameters:

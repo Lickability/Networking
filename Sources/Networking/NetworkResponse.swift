@@ -9,7 +9,7 @@
 import Foundation
 
 /// A defined structure for a successful network response.
-public struct NetworkResponse {
+public struct NetworkResponse: Sendable {
     
     /// The data contained in the response.
     public let data: Data?

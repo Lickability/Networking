@@ -9,7 +9,7 @@
 import Foundation
 
 /// Encapsulates HTTP methods for requests.
-public enum HTTPMethod: String {
+public enum HTTPMethod: String, Sendable {
     
     /// HTTP `GET`.
     case get = "GET"

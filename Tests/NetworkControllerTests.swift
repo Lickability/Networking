@@ -61,37 +61,39 @@ class NetworkControllerTests: XCTestCase {
 
     func testAsyncAwaitBehaviors() async throws {
         let networkController = NetworkController(networkSession: MockNetworkSession(result: .failure(NetworkError.noResponse)))
-
-        var requestWillSendWasCalled = false
-        var requestDidFinishWasCalled = false
-
-        let behavior = TestBehavior {
-            requestWillSendWasCalled = true
-            XCTAssertFalse(requestDidFinishWasCalled, "We should’ve reached this point before `requestDidFinishWasCalled` became true.")
-        } didFinishClosure: {
-            requestDidFinishWasCalled = true
+        let expectation = expectation(description: "testAsyncAwaitBehaviors")
+        
+        let behavior = TestBehavior { willSend in
+            XCTAssertTrue(willSend)
+        } didFinishClosure: { didSend in
+            XCTAssertTrue(didSend)
+            expectation.fulfill()
         }
-
+        
         do {
             let _: [Photo] = try await networkController.send(PhotoRequest.photosList, requestBehaviors: [behavior])
             XCTFail("Should’ve caught an error before reaching here.")
+        } catch {
+            if let networkError = error as? NetworkError {
+                XCTAssertEqual(networkError.localizedDescription, NetworkError.noResponse.localizedDescription)
+            } else {
+                XCTFail("Expected to be able to cast error to NetworkError.")
+            }
         }
-        catch {
-            XCTAssertTrue(requestWillSendWasCalled)
-            XCTAssertTrue(requestDidFinishWasCalled)
-        }
+        
+        await fulfillment(of: [expectation], timeout: 0.5)
     }
 }
 
 private struct TestBehavior: RequestBehavior {
-    let willSendClosure: () -> Void
-    let didFinishClosure: () -> Void
+    let willSendClosure: @Sendable (Bool) -> Void
+    let didFinishClosure: @Sendable (Bool) -> Void
 
     func requestWillSend(request: inout URLRequest) {
-        willSendClosure()
+        willSendClosure(true)
     }
 
     func requestDidFinish(result: Result<NetworkResponse, NetworkError>) {
-        didFinishClosure()
+        didFinishClosure(true)
     }
 }

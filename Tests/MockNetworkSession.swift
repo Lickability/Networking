@@ -10,7 +10,7 @@ import Foundation
 import Networking
 
 /// A mocked version of `NetworkSession` to be used in tests. Allows specification of success or failure cases.
-class MockNetworkSession: NetworkSession {
+final class MockNetworkSession: NetworkSession {
     private let result: Result<Data, Error>
 
     /// Creates a new `MockNetworkSession`.
@@ -41,10 +41,13 @@ class MockNetworkSession: NetworkSession {
     }
 }
 
-private class MockNetworkSessionDataTask: NetworkSessionDataTask {
-    private let resumeClosure: () -> Void
-
-    init(closure: @escaping () -> Void) {
+private final class MockNetworkSessionDataTask: NetworkSessionDataTask {
+    
+    let progress = Progress()
+    
+    private let resumeClosure: @Sendable () -> Void
+    
+    init(closure: @escaping @Sendable () -> Void) {
         self.resumeClosure = closure
     }
 

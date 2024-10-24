@@ -8,7 +8,7 @@
 
 import UIKit
 import Combine
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let controller = NetworkController()

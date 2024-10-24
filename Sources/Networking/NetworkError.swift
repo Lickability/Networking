@@ -9,7 +9,7 @@
 import Foundation
 
 /// Possible errors encountered during networking.
-public enum NetworkError: LocalizedError {
+public enum NetworkError: LocalizedError, Sendable {
     
     // MARK: - NetworkError
     
