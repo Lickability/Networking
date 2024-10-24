@@ -22,11 +22,6 @@ public protocol RequestBehavior: Sendable {
     func requestDidFinish(result: Result<NetworkResponse, NetworkError>)
 }
 
-public extension RequestBehavior {
-    func requestWillSend(request: inout URLRequest) { }
-    func requestDidFinish(result: Result<NetworkResponse, NetworkError>) { }
-}
-
 extension Array: RequestBehavior where Element == RequestBehavior {
     public func requestWillSend(request: inout URLRequest) {
         forEach { $0.requestWillSend(request: &request) }
