@@ -9,7 +9,7 @@
 import Foundation
 
 /// A protocol that can be used to implement behavior for requests being made.
-public protocol RequestBehavior {
+public protocol RequestBehavior: Sendable {
     
     /// A function that is called before a request is sent. You may modify the request at this time.
     ///
@@ -20,11 +20,6 @@ public protocol RequestBehavior {
     ///
     /// - Parameter result: The result from making the request.
     func requestDidFinish(result: Result<NetworkResponse, NetworkError>)
-}
-
-public extension RequestBehavior {
-    func requestWillSend(request: inout URLRequest) { }
-    func requestDidFinish(result: Result<NetworkResponse, NetworkError>) { }
 }
 
 extension Array: RequestBehavior where Element == RequestBehavior {

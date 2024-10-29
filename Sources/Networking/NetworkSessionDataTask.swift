@@ -9,7 +9,7 @@
 import Foundation
 
 /// Describes a network session task that can be performed. This protocol has a similar API to `URLSessionDataTask` for the purpose of mocking.
-public protocol NetworkSessionDataTask {
+public protocol NetworkSessionDataTask: Sendable {
     
     /// Progress object which represents the task progress. It can be used for task progress tracking.
     ///
