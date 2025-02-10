@@ -7,7 +7,7 @@ let name = "Networking"
 let package = Package(
     name: name,
     defaultLocalization: "en",
-    platforms: [.iOS(.v16)],
+    platforms: [.iOS(.v16), .macOS(.v10_15)],
     products: [.library(name: name, targets: [name])],
     targets: [.target(name: name, resources: [.process("Resources")])]
 )
