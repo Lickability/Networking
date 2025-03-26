@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B96DC552A0AB67B00FF0499 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96DC542A0AB67B00FF0499 /* NetworkSession.swift */; };
+		0B96DC572A0AB91B00FF0499 /* MockNetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96DC562A0AB91B00FF0499 /* MockNetworkSession.swift */; };
+		0B96DC5A2A0AC7E800FF0499 /* NetworkSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96DC582A0AC7A800FF0499 /* NetworkSessionDataTask.swift */; };
+		0B96DC5C2A0AC99F00FF0499 /* NetworkControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96DC5B2A0AC99F00FF0499 /* NetworkControllerTests.swift */; };
 		4C2CBFAC24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */; };
 		F211601924884A4D00B48D52 /* PhotoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211601824884A4D00B48D52 /* PhotoRequest.swift */; };
 		F211601B24884ABF00B48D52 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211601A24884ABF00B48D52 /* Photo.swift */; };
@@ -41,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B96DC542A0AB67B00FF0499 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		0B96DC562A0AB91B00FF0499 /* MockNetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkSession.swift; sourceTree = "<group>"; };
+		0B96DC582A0AC7A800FF0499 /* NetworkSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionDataTask.swift; sourceTree = "<group>"; };
+		0B96DC5B2A0AC99F00FF0499 /* NetworkControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerTests.swift; sourceTree = "<group>"; };
 		4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkRequestPerformer+JSON.swift"; sourceTree = "<group>"; };
 		F211601824884A4D00B48D52 /* PhotoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequest.swift; sourceTree = "<group>"; };
 		F211601A24884ABF00B48D52 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -105,6 +113,8 @@
 				F2B5BC522488378200B6A52A /* RequestBehavior.swift */,
 				F2B5BC54248837B400B6A52A /* NetworkRequestPerformer.swift */,
 				F2B5BC56248837CB00B6A52A /* NetworkController.swift */,
+				0B96DC542A0AB67B00FF0499 /* NetworkSession.swift */,
+				0B96DC582A0AC7A800FF0499 /* NetworkSessionDataTask.swift */,
 				4C2CBFAB24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift */,
 				F264BB4D28BE9D6500969CD1 /* NetworkRequestStateController.swift */,
 				F25AECB929F4941800DF5437 /* ErrorInformation.swift */,
@@ -152,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				F2B5BC3D248836C600B6A52A /* NetworkingTests.swift */,
+				0B96DC562A0AB91B00FF0499 /* MockNetworkSession.swift */,
+				0B96DC5B2A0AC99F00FF0499 /* NetworkControllerTests.swift */,
 				F2B5BC3F248836C600B6A52A /* Info.plist */,
 			);
 			path = Tests;
@@ -225,8 +237,9 @@
 		F2B5BC1B248836C500B6A52A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1600;
 				ORGANIZATIONNAME = Lickability;
 				TargetAttributes = {
 					F2B5BC22248836C500B6A52A = {
@@ -287,6 +300,7 @@
 				F25AECBA29F4941800DF5437 /* ErrorInformation.swift in Sources */,
 				F2B5BC57248837CB00B6A52A /* NetworkController.swift in Sources */,
 				F2B5BC49248836F300B6A52A /* HTTPMethod.swift in Sources */,
+				0B96DC5A2A0AC7E800FF0499 /* NetworkSessionDataTask.swift in Sources */,
 				F2B5BC532488378200B6A52A /* RequestBehavior.swift in Sources */,
 				F2B5BC55248837B400B6A52A /* NetworkRequestPerformer.swift in Sources */,
 				F2B5BC27248836C500B6A52A /* AppDelegate.swift in Sources */,
@@ -297,6 +311,7 @@
 				F264BB5028BE9E1700969CD1 /* Publisher+Result.swift in Sources */,
 				F2B5BC2B248836C500B6A52A /* ContentView.swift in Sources */,
 				4C2CBFAC24D4AA9800920BE2 /* NetworkRequestPerformer+JSON.swift in Sources */,
+				0B96DC552A0AB67B00FF0499 /* NetworkSession.swift in Sources */,
 				F2B5BC4F2488376C00B6A52A /* NetworkRequest.swift in Sources */,
 				F2B5BC4D2488375C00B6A52A /* NetworkError.swift in Sources */,
 			);
@@ -307,6 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2B5BC3E248836C600B6A52A /* NetworkingTests.swift in Sources */,
+				0B96DC5C2A0AC99F00FF0499 /* NetworkControllerTests.swift in Sources */,
+				0B96DC572A0AB91B00FF0499 /* MockNetworkSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +375,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -368,6 +386,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -382,13 +401,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -418,6 +439,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -428,6 +450,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -436,12 +459,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -455,14 +480,14 @@
 				DEVELOPMENT_TEAM = JL4AKR8DVC;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.lickability.Networking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -476,14 +501,14 @@
 				DEVELOPMENT_TEAM = JL4AKR8DVC;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.lickability.Networking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -491,12 +516,11 @@
 		F2B5BC46248836C600B6A52A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JL4AKR8DVC;
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -504,7 +528,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.lickability.NetworkingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Networking.app/Networking";
 			};
@@ -513,12 +537,11 @@
 		F2B5BC47248836C600B6A52A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JL4AKR8DVC;
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -526,7 +549,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.lickability.NetworkingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Networking.app/Networking";
 			};

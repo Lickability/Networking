@@ -1,10 +1,10 @@
 {
   "name": "Networking",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "homepage": "https://github.com/Lickability/Networking",
   "source": {
       "git": "https://github.com/Lickability/Networking.git",
-      "tag": "0.1.0"
+      "tag": "3.0.0"
   },
   "summary": "A library that handles networking.",
   "authors" : {
@@ -16,9 +16,9 @@
     "file": "LICENSE"
   },
   "platforms": {
-    "ios": "13.0"
+    "ios": "16.0"
   },
-  "swift_version": "5.0",
+  "swift_version": "6.0",
   "requires_arc": true,
   "frameworks": [
     "Foundation"
