@@ -72,7 +72,6 @@ extension NetworkController: NetworkRequestPerformer {
         return dataTask
     }
 
-    @MainActor
     @discardableResult public func send(_ request: any NetworkRequest, scheduler: some Scheduler = DispatchQueue.main, requestBehaviors: [RequestBehavior] = []) -> AnyPublisher<NetworkResponse, NetworkError> {
         let behaviors = defaultRequestBehaviors + requestBehaviors
         let urlRequest = makeFinalizedRequest(fromOriginalRequest: request.urlRequest, behaviors: behaviors)
